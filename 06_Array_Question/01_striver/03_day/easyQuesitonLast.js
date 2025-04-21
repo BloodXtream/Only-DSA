@@ -35,10 +35,36 @@ const twoPointerUnion = (arr1, arr2) => {
     while (i < n) {
         if (result[result.length - 1] !== arr1[i]) {
             result.push(arr1[i])
-        }
+        } a
         i++
     }
     return result
+}
+
+const missingNumberBrute = (arr) => {
+    for (let i = 1; i <= n; i++) {
+        let flag = 0
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j] === i) {
+                flag = 1
+                break
+            }
+        }
+        if (flag === 0) {
+            return i
+        }
+    }
+    return 'No missing number'
+}
+
+const missingNumberOptimal = (arr) => {
+    let n = arr.length
+    let sumOne = (n * (n + 1)) / 2
+    let sumTwo = 0
+    for (let i = 0; i < n; i++) {
+        sumTwo += arr[i]
+    }
+    return sumOne - sumTwo
 }
 
 const prompt = require('prompt-sync')()
@@ -46,6 +72,8 @@ const inputOne = prompt(`Enter the number seperated by spaces: `)
 const inputTwo = prompt(`Enter the number seperated by spaces: `)
 const arrOne = inputOne.split(' ').map(Number)
 const arrTwo = inputTwo.split(' ').map(Number)
+console.log(missingNumberOptimal(arrOne))
+console.log(missingNumberBrute(arrOne))
 console.log(twoPointerUnion(arrOne, arrTwo))
-// console.log(bruteCodeUnion(arrOne, arrTwo))
-// console.log(unionOptimal(arrOne, arrTwo))
+console.log(bruteCodeUnion(arrOne, arrTwo))
+console.log(unionOptimal(arrOne, arrTwo))
