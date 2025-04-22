@@ -41,7 +41,7 @@ const twoPointerUnion = (arr1, arr2) => {
     return result
 }
 
-const missingNumberBrute = (arr) => {
+const missingNumberBrute = (arr, n) => {
     for (let i = 1; i <= n; i++) {
         let flag = 0
         for (let j = 0; j < arr.length; j++) {
@@ -67,13 +67,45 @@ const missingNumberOptimal = (arr) => {
     return sumOne - sumTwo
 }
 
+const maxConsecutiveOne = (arr) => {
+    let max = 0
+    let cnt = 0
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === 1) {
+            cnt++
+            max = Math.max(max, cnt)
+        }
+        else {
+            cnt = 0
+        }
+    }
+    return max
+}
+
+const singleNumberBrute = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        let n = arr[i]
+        let cnt = 0
+        for (let j = 0; j < arr.length; j++) {
+            if (n === arr[j]) {
+                cnt++
+            }
+        }
+        if (cnt === 1) {
+            return n;
+        }
+    }
+}
+
 const prompt = require('prompt-sync')()
 const inputOne = prompt(`Enter the number seperated by spaces: `)
 const inputTwo = prompt(`Enter the number seperated by spaces: `)
 const arrOne = inputOne.split(' ').map(Number)
 const arrTwo = inputTwo.split(' ').map(Number)
 console.log(missingNumberOptimal(arrOne))
-console.log(missingNumberBrute(arrOne))
+console.log(singleNumberBrute(arrOne))
+console.log(maxConsecutiveOne(arrOne))
+console.log(missingNumberBrute(arrOne, 5))
 console.log(twoPointerUnion(arrOne, arrTwo))
 console.log(bruteCodeUnion(arrOne, arrTwo))
 console.log(unionOptimal(arrOne, arrTwo))
